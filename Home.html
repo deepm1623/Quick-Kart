@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickKart - Curated Groceries</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search superfoods, chef boxes, more..." aria-label="Search products">
+        <button type="button">Discover</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero" style="background-image: linear-gradient(120deg, rgba(15,76,129,0.95), rgba(46,196,182,0.9)), url('bg.jpg');">
+    <div>
+      <h1>Premium pantry essentials crafted for slow living.</h1>
+      <p>Shop 100% traceable produce curated from organic micro farms, artisanal bakeries, and craft dairies. Delivered chilled within 60 minutes across the city.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Shop the drop</button>
+        <button class="btn-ghost" onclick="window.location.href='subscriptions.html'">Explore subscriptions</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>120+</strong>
+          Curated partners
+        </div>
+        <div class="hero-stat">
+          <strong>4.9/5</strong>
+          Guest rating
+        </div>
+        <div class="hero-stat">
+          <strong>36 min</strong>
+          Avg delivery
+        </div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=80" alt="Fresh produce" style="width:100%; border-radius:24px; box-shadow: var(--shadow); max-height:360px; object-fit: cover;">
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Elevated essentials</h2>
+        <span style="color: var(--muted);">Sourced with intention. Packed with care.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-leaf'></i>
+          <h3>Farm traceability</h3>
+          <p>Scan every item to learn about the farm, harvest window, and farmer story.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-droplet'></i>
+          <h3>Cold-chain delivery</h3>
+          <p>Temperature-controlled fleet keeps greens crisp and dairy perfectly chilled.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-star'></i>
+          <h3>Sommelier picks</h3>
+          <p>Weekly curations from award-winning chefs and nutritionists.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-receipt'></i>
+          <h3>Carbon-light</h3>
+          <p>Zero plastic packaging and consolidated neighborhood routes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop" style="display: none;">
+      <div class="section-header">
+        <h2 style="margin-bottom: 8px;">Search Results</h2>
+        <span style="color: var(--muted); font-size: 0.95rem;" id="search-results-count"></span>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const allProducts = [
+      { id: 201, name: 'Baby rainbow carrots', category: 'vegetables', price: 40, meta: '1 kg bunch', image: 'images/vegies/carrot.png' },
+      { id: 202, name: 'Crisp broccoli crowns', category: 'vegetables', price: 60, meta: '500 g', image: 'images/vegies/broccoli.png' },
+      { id: 203, name: 'Heritage tomatoes', category: 'vegetables', price: 30, meta: '1 kg', image: 'images/vegies/tomato.png' },
+      { id: 204, name: 'Spinach medley', category: 'vegetables', price: 25, meta: '400 g', image: 'images/vegies/spinach.png' },
+      { id: 205, name: 'Sweet pearl onions', category: 'vegetables', price: 35, meta: '1 kg', image: 'images/vegies/onion.png' },
+      { id: 206, name: 'Butter potatoes', category: 'vegetables', price: 25, meta: '1.5 kg', image: 'images/vegies/potato.png' },
+      { id: 207, name: 'Savoy cabbage', category: 'vegetables', price: 30, meta: '1 whole', image: 'images/vegies/cabbage.png' },
+      { id: 208, name: 'Cauliflower florets', category: 'vegetables', price: 45, meta: '1 head', image: 'images/vegies/cauliflower.png' },
+      { id: 209, name: 'Garden peas', category: 'vegetables', price: 50, meta: '500 g', image: 'images/vegies/green peas.png' },
+      { id: 210, name: 'Tri-color capsicum', category: 'vegetables', price: 40, meta: '600 g', image: 'images/vegies/capsicum.png' },
+      { id: 211, name: 'Morning radish', category: 'vegetables', price: 20, meta: '500 g', image: 'images/vegies/radish.png' },
+      { id: 212, name: 'Ruby beetroot', category: 'vegetables', price: 30, meta: '600 g', image: 'images/vegies/beetroot.png' },
+      { id: 213, name: 'Smoked garlic pearls', category: 'vegetables', price: 55, meta: '250 g', image: 'images/vegies/garlic.png' },
+      { id: 214, name: 'Ancient ginger', category: 'vegetables', price: 45, meta: '250 g', image: 'images/vegies/ginger.png' },
+      { id: 215, name: 'Sweet corn cobs', category: 'vegetables', price: 35, meta: '4 cobs', image: 'images/vegies/sweet corn.png' },
+      { id: 216, name: 'Regal brinjal set', category: 'vegetables', price: 28, meta: '700 g', image: 'images/vegies/brinjal.png' },
+      { id: 217, name: 'Hydro cucumbers', category: 'vegetables', price: 25, meta: '500 g', image: 'images/vegies/cucumber.png' },
+      { id: 218, name: 'Bird\'s eye chilli', category: 'vegetables', price: 22, meta: '200 g', image: 'images/vegies/green chilli.png' },
+      { id: 219, name: 'Amber pumpkin wedges', category: 'vegetables', price: 40, meta: '1 kg', image: 'images/vegies/pumpkin.png' },
+      { id: 220, name: 'Gem lettuce', category: 'vegetables', price: 55, meta: '2 heads', image: 'images/vegies/lettuce.png' },
+      { id: 301, name: 'Apple', category: 'fruits', price: 60, meta: '1 kg', image: 'images/fruits/Apple.png' },
+      { id: 302, name: 'Banana', category: 'fruits', price: 30, meta: '1 kg', image: 'images/fruits/Banana.png' },
+      { id: 303, name: 'Orange', category: 'fruits', price: 50, meta: '1 kg', image: 'images/fruits/Orange.png' },
+      { id: 304, name: 'Mango', category: 'fruits', price: 80, meta: '1 kg', image: 'images/fruits/Mango.png' },
+      { id: 305, name: 'Papaya', category: 'fruits', price: 45, meta: '1 kg', image: 'images/fruits/Papaya.png' },
+      { id: 306, name: 'Pineapple', category: 'fruits', price: 70, meta: '1 piece', image: 'images/fruits/Pineapple.png' },
+      { id: 307, name: 'Watermelon', category: 'fruits', price: 90, meta: '1 piece', image: 'images/fruits/Watermelon.png' },
+      { id: 308, name: 'Guava', category: 'fruits', price: 40, meta: '1 kg', image: 'images/fruits/Guava.png' },
+      { id: 309, name: 'Kiwi', category: 'fruits', price: 75, meta: '1 kg', image: 'images/fruits/Kiwi.png' },
+      { id: 310, name: 'Grapes', category: 'fruits', price: 55, meta: '1 kg', image: 'images/fruits/Grapes.png' },
+      { id: 311, name: 'Chikoo', category: 'fruits', price: 50, meta: '1 kg', image: 'images/fruits/Chikoo.png' },
+      { id: 312, name: 'Pomegranate', category: 'fruits', price: 85, meta: '1 kg', image: 'images/fruits/Pomegranate.png' },
+      { id: 313, name: 'Strawberry', category: 'fruits', price: 95, meta: '250 g', image: 'images/fruits/Strawberry.png' },
+      { id: 314, name: 'Blueberry', category: 'fruits', price: 120, meta: '250 g', image: 'images/fruits/Blueberry.png' },
+      { id: 315, name: 'Lychee', category: 'fruits', price: 60, meta: '1 kg', image: 'images/fruits/Lychee.png' },
+      { id: 316, name: 'Pear', category: 'fruits', price: 65, meta: '1 kg', image: 'images/fruits/Pear.png' },
+      { id: 317, name: 'Peach', category: 'fruits', price: 70, meta: '1 kg', image: 'images/fruits/Peach.png' },
+      { id: 318, name: 'Plum', category: 'fruits', price: 68, meta: '1 kg', image: 'images/fruits/Plum.png' },
+      { id: 319, name: 'Custard Apple', category: 'fruits', price: 85, meta: '1 kg', image: 'images/fruits/Custard Apple.png' },
+      { id: 320, name: 'Dragon Fruit', category: 'fruits', price: 110, meta: '1 piece', image: 'images/fruits/Dragon Fruit.png' },
+      { id: 401, name: 'White Bread', category: 'bakery', price: 30, meta: '1 pc', image: 'images/bakery/White Bread.png' },
+      { id: 402, name: 'Brown Bread', category: 'bakery', price: 35, meta: '1 pc', image: 'images/bakery/Brown Bread.png' },
+      { id: 403, name: 'Bun', category: 'bakery', price: 20, meta: '1 pc', image: 'images/bakery/Bun.png' },
+      { id: 404, name: 'Croissant', category: 'bakery', price: 50, meta: '1 pc', image: 'images/bakery/Croissant.png' },
+      { id: 405, name: 'Donut', category: 'bakery', price: 45, meta: '1 pc', image: 'images/bakery/Donut.png' },
+      { id: 406, name: 'Muffin', category: 'bakery', price: 40, meta: '1 pc', image: 'images/bakery/Muffin.png' },
+      { id: 407, name: 'Cupcake', category: 'bakery', price: 38, meta: '1 pc', image: 'images/bakery/Cupcake.png' },
+      { id: 408, name: 'Fruit Cake', category: 'bakery', price: 60, meta: '1 slice', image: 'images/bakery/Fruit Cake.png' },
+      { id: 409, name: 'Pound Cake', category: 'bakery', price: 65, meta: '1 slice', image: 'images/bakery/Pound Cake.png' },
+      { id: 410, name: 'Cream Roll', category: 'bakery', price: 55, meta: '1 pc', image: 'images/bakery/Cream Roll.png' },
+      { id: 411, name: 'Garlic Bread', category: 'bakery', price: 50, meta: '1 pc', image: 'images/bakery/Garlic Bread.png' },
+      { id: 412, name: 'Breadsticks', category: 'bakery', price: 25, meta: '1 pack', image: 'images/bakery/Breadsticks.png' },
+      { id: 413, name: 'Bagel', category: 'bakery', price: 45, meta: '1 pc', image: 'images/bakery/Bagel.png' },
+      { id: 414, name: 'Pizza Base', category: 'bakery', price: 35, meta: '1 pc', image: 'images/bakery/Pizza Base.png' },
+      { id: 415, name: 'Khari', category: 'bakery', price: 22, meta: '100 g', image: 'images/bakery/Khari.png' },
+      { id: 416, name: 'Rusk', category: 'bakery', price: 28, meta: '100 g', image: 'images/bakery/Rusk.png' },
+      { id: 417, name: 'Paneer Puff', category: 'bakery', price: 42, meta: '1 pc', image: 'images/bakery/Paneer Puff.png' },
+      { id: 418, name: 'Veg Puff', category: 'bakery', price: 40, meta: '1 pc', image: 'images/bakery/Veg Puff.png' },
+      { id: 419, name: 'Cheese Bun', category: 'bakery', price: 48, meta: '1 pc', image: 'images/bakery/Cheese Bun.png' },
+      { id: 420, name: 'Chocolate Cake', category: 'bakery', price: 75, meta: '1 slice', image: 'images/bakery/Chocolate Cake.png' },
+      { id: 501, name: 'Milk', category: 'dairy', price: 55, meta: '1 L', image: 'images/dairy/Milk.png' },
+      { id: 502, name: 'Butter', category: 'dairy', price: 80, meta: '100 g', image: 'images/dairy/Butter.png' },
+      { id: 503, name: 'Cheese', category: 'dairy', price: 90, meta: '100 g', image: 'images/dairy/Cheese.png' },
+      { id: 504, name: 'Curd', category: 'dairy', price: 45, meta: '500 g', image: 'images/dairy/Curd.png' },
+      { id: 505, name: 'Paneer', category: 'dairy', price: 95, meta: '200 g', image: 'images/dairy/Paneer.png' },
+      { id: 506, name: 'Ghee', category: 'dairy', price: 120, meta: '200 ml', image: 'images/dairy/Ghee.png' },
+      { id: 507, name: 'Flavored Milk', category: 'dairy', price: 40, meta: '250 ml', image: 'images/dairy/Flavored Milk.png' },
+      { id: 508, name: 'Buttermilk', category: 'dairy', price: 25, meta: '250 ml', image: 'images/dairy/Buttermilk.png' },
+      { id: 509, name: 'Cream', category: 'dairy', price: 60, meta: '100 g', image: 'images/dairy/Cream.png' },
+      { id: 510, name: 'Lassi', category: 'dairy', price: 30, meta: '250 ml', image: 'images/dairy/Lassi.png' },
+      { id: 511, name: 'Khoya', category: 'dairy', price: 100, meta: '250 g', image: 'images/dairy/Khoya.png' },
+      { id: 512, name: 'Cheddar Cheese', category: 'dairy', price: 110, meta: '200 g', image: 'images/dairy/Cheddar Cheese.png' },
+      { id: 513, name: 'Mozzarella', category: 'dairy', price: 115, meta: '200 g', image: 'images/dairy/Mozzarella.png' },
+      { id: 514, name: 'Milk Powder', category: 'dairy', price: 95, meta: '500 g', image: 'images/dairy/Milk Powder.png' },
+      { id: 515, name: 'Whey Protein', category: 'dairy', price: 150, meta: '100 g', image: 'images/dairy/Whey Protein.png' },
+      { id: 516, name: 'Malted Drink', category: 'dairy', price: 60, meta: '500 g', image: 'images/dairy/Malted Drink.png' },
+      { id: 517, name: 'Milk Shake', category: 'dairy', price: 45, meta: '300 ml', image: 'images/dairy/Milk Shake.png' },
+      { id: 518, name: 'Shrikhand', category: 'dairy', price: 70, meta: '200 g', image: 'images/dairy/Shrikhand.png' },
+      { id: 519, name: 'Probiotic Curd', category: 'dairy', price: 55, meta: '400 g', image: 'images/dairy/Probiotic Curd.png' },
+      { id: 520, name: 'Low-Fat Milk', category: 'dairy', price: 50, meta: '1 L', image: 'images/dairy/Low-Fat Milk.png' },
+      { id: 601, name: 'Wheat', category: 'grains', price: 45, meta: '500 g', image: 'images/grains/Wheat.png' },
+      { id: 602, name: 'Rice', category: 'grains', price: 60, meta: '500 g', image: 'images/grains/Rice.png' },
+      { id: 603, name: 'Barley', category: 'grains', price: 50, meta: '500 g', image: 'images/grains/Barley.png' },
+      { id: 604, name: 'Oats', category: 'grains', price: 55, meta: '500 g', image: 'images/grains/Oats.png' },
+      { id: 605, name: 'Millet (Bajra)', category: 'grains', price: 40, meta: '500 g', image: 'images/grains/Millet (Bajra).png' },
+      { id: 606, name: 'Maize (Corn)', category: 'grains', price: 35, meta: '500 g', image: 'images/grains/Maize (Corn).png' },
+      { id: 607, name: 'Ragi', category: 'grains', price: 38, meta: '500 g', image: 'images/grains/Ragi.png' },
+      { id: 608, name: 'Sorghum (Jowar)', category: 'grains', price: 42, meta: '500 g', image: 'images/grains/Sorghum (Jowar).png' },
+      { id: 609, name: 'Quinoa', category: 'grains', price: 110, meta: '500 g', image: 'images/grains/Quinoa.png' },
+      { id: 610, name: 'Amaranth', category: 'grains', price: 75, meta: '500 g', image: 'images/grains/Amaranth.png' },
+      { id: 611, name: 'Brown Rice', category: 'grains', price: 65, meta: '500 g', image: 'images/grains/Brown Rice.png' },
+      { id: 612, name: 'Basmati Rice', category: 'grains', price: 90, meta: '500 g', image: 'images/grains/Basmati Rice.png' },
+      { id: 613, name: 'Broken Wheat', category: 'grains', price: 48, meta: '500 g', image: 'images/grains/Broken Wheat.png' },
+      { id: 614, name: 'Flattened Rice', category: 'grains', price: 36, meta: '500 g', image: 'images/grains/Flattened Rice.png' },
+      { id: 615, name: 'Semolina (Rava)', category: 'grains', price: 34, meta: '500 g', image: 'images/grains/Semolina (Rava).png' },
+      { id: 616, name: 'Buckwheat', category: 'grains', price: 80, meta: '500 g', image: 'images/grains/Buckwheat.png' },
+      { id: 617, name: 'Pearl Barley', category: 'grains', price: 52, meta: '500 g', image: 'images/grains/Pearl Barley.png' },
+      { id: 618, name: 'Foxtail Millet', category: 'grains', price: 60, meta: '500 g', image: 'images/grains/Foxtail Millet.png' },
+      { id: 619, name: 'Little Millet', category: 'grains', price: 58, meta: '500 g', image: 'images/grains/Little Millet.png' },
+      { id: 620, name: 'Kodo Millet', category: 'grains', price: 56, meta: '500 g', image: 'images/grains/Kodo Millet.png' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.setGlobalProducts(allProducts);
+      KartUI.initSearch('global');
+    });
+  </script>
+</body>
+</html>

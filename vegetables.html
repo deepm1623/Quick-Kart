@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vegetables - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search heirloom greens & salad kits..." aria-label="Search vegetables">
+        <button type="button">Find</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button class="active">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(21,77,60,0.95), rgba(46,196,182,0.9)), url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Misty-morning harvests, chilled by noon.</h1>
+      <p>Our vegetable concierge curates micro-seasonal greens, vine tomatoes, and earthy roots directly from regenerative farms. Every crate carries tasting notes and storage ritual cards.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Browse harvest</button>
+        <button class="btn-ghost" onclick="window.location.href='Home.html'">Back to home</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>18 farms</strong>
+          Partnered this week
+        </div>
+        <div class="hero-stat">
+          <strong>36 hrs</strong>
+          From soil to shelf
+        </div>
+        <div class="hero-stat">
+          <strong>0 pesticides</strong>
+          Verified lots
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Soil-to-table rituals</h2>
+        <span style="color: var(--muted);">Picked at sunrise, chilled in copper crates.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-sun'></i>
+          <h3>Dawn-picked freshness</h3>
+          <p>Every crate is sealed before 8 am to preserve the natural bloom and crunch.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-color-fill'></i>
+          <h3>Hydro-wash spa</h3>
+          <p>Triple rinsed in mineral-rich water so your prep time drops to seconds.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-label'></i>
+          <h3>Traceable batches</h3>
+          <p>Scan the QR to meet the farmer, soil type, and regenerative practices per lot.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-package'></i>
+          <h3>Reusable totes</h3>
+          <p>Veggies arrive in insulated totes which we collect & sanitize on your next drop.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Vegetable chef boxes</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='subscriptions.html'">Reserve standing order</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const vegetableList = [
+      { id: 201, name: 'Baby rainbow carrots', category: 'rooted', price: 40, meta: '1 kg bunch', image: 'images/vegies/carrot.png' },
+      { id: 202, name: 'Crisp broccoli crowns', category: 'brassica', price: 60, meta: '500 g', image: 'images/vegies/broccoli.png' },
+      { id: 203, name: 'Heritage tomatoes', category: 'vine ripened', price: 30, meta: '1 kg', image: 'images/vegies/tomato.png' },
+      { id: 204, name: 'Spinach medley', category: 'leafy', price: 25, meta: '400 g', image: 'images/vegies/spinach.png' },
+      { id: 205, name: 'Sweet pearl onions', category: 'gourmet staples', price: 35, meta: '1 kg', image: 'images/vegies/onion.png' },
+      { id: 206, name: 'Butter potatoes', category: 'comfort root', price: 25, meta: '1.5 kg', image: 'images/vegies/potato.png' },
+      { id: 207, name: 'Savoy cabbage', category: 'leaf layers', price: 30, meta: '1 whole', image: 'images/vegies/cabbage.png' },
+      { id: 208, name: 'Cauliflower florets', category: 'cloud picks', price: 45, meta: '1 head', image: 'images/vegies/cauliflower.png' },
+      { id: 209, name: 'Garden peas', category: 'pods & pulses', price: 50, meta: '500 g', image: 'images/vegies/green peas.png' },
+      { id: 210, name: 'Tri-color capsicum', category: 'market mix', price: 40, meta: '600 g', image: 'images/vegies/capsicum.png' },
+      { id: 211, name: 'Morning radish', category: 'rooted', price: 20, meta: '500 g', image: 'images/vegies/radish.png' },
+      { id: 212, name: 'Ruby beetroot', category: 'detox picks', price: 30, meta: '600 g', image: 'images/vegies/beetroot.png' },
+      { id: 213, name: 'Smoked garlic pearls', category: 'pantry', price: 55, meta: '250 g', image: 'images/vegies/garlic.png' },
+      { id: 214, name: 'Ancient ginger', category: 'spice root', price: 45, meta: '250 g', image: 'images/vegies/ginger.png' },
+      { id: 215, name: 'Sweet corn cobs', category: 'midnight snack', price: 35, meta: '4 cobs', image: 'images/vegies/sweet corn.png' },
+      { id: 216, name: 'Regal brinjal set', category: 'chef pick', price: 28, meta: '700 g', image: 'images/vegies/brinjal.png' },
+      { id: 217, name: 'Hydro cucumbers', category: 'hydroponic', price: 25, meta: '500 g', image: 'images/vegies/cucumber.png' },
+      { id: 218, name: 'Bird’s eye chilli', category: 'spice', price: 22, meta: '200 g', image: 'images/vegies/green chilli.png' },
+      { id: 219, name: 'Amber pumpkin wedges', category: 'slow roasts', price: 40, meta: '1 kg', image: 'images/vegies/pumpkin.png' },
+      { id: 220, name: 'Gem lettuce', category: 'salad atelier', price: 55, meta: '2 heads', image: 'images/vegies/lettuce.png' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(vegetableList);
+      KartUI.initSearch('category');
+    });
+  </script>
+</body>
+</html>
+

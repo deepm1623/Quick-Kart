@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dairy - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search A2 milk, cultured butter & more..." aria-label="Search dairy">
+        <button type="button">Pour</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button class="active">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(12,58,93,0.9), rgba(46,196,182,0.8)), url('https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Heritage dairy cultured in micro batches.</h1>
+      <p>We bottle single-origin A2 milk, 18-hour hung curd, and cultured butters churned in wooden pots. Each bottle travels inside insulated crates with live temperature sensors.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Pour goodness</button>
+        <button class="btn-ghost" onclick="window.location.href='subscriptions.html'">Start a dairy plan</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>0.5°C</strong>
+          Cold-chain delta
+        </div>
+        <div class="hero-stat">
+          <strong>9 creameries</strong>
+          Across countryside
+        </div>
+        <div class="hero-stat">
+          <strong>Lab tested</strong>
+          Each morning batch
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Milky way perks</h2>
+        <span style="color: var(--muted);">Protein-dense, probiotic-rich, and chef-approved.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-test-tube'></i>
+          <h3>Daily labs</h3>
+          <p>Every lot checked for antibiotic residue, adulteration, and density.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-wind'></i>
+          <h3>Low-temp pasteurization</h3>
+          <p>Retains natural sweetness and creamline fat for latte art at home.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-droplet'></i>
+          <h3>Glass bottled</h3>
+          <p>Reusable glass jars wrapped in cooling gels keep dairy fresher longer.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-cycling'></i>
+          <h3>Morning circuits</h3>
+          <p>Dedicated cyclists deliver within 40 minutes so curds never split.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Creamery essentials</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='Home.html'">Discover more</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const dairyList = [
+      { id: 501, name: 'Farm fresh milk', category: 'essentials', price: 55, meta: '1 L', image: 'images/dairy/Milk.png' },
+      { id: 502, name: 'Cultured butter', category: 'butter bar', price: 80, meta: '100 g', image: 'images/dairy/Butter.png' },
+      { id: 503, name: 'Cheese block', category: 'cheese room', price: 90, meta: '100 g', image: 'images/dairy/Cheese.png' },
+      { id: 504, name: 'Thick curd', category: 'ferments', price: 45, meta: '500 g', image: 'images/dairy/Curd.png' },
+      { id: 505, name: 'Malai paneer', category: 'protein', price: 95, meta: '200 g', image: 'images/dairy/Paneer.png' },
+      { id: 506, name: 'A2 ghee', category: 'heritage', price: 120, meta: '200 ml', image: 'images/dairy/Ghee.png' },
+      { id: 507, name: 'Flavored milk trio', category: 'ready to sip', price: 40, meta: '250 ml', image: 'images/dairy/Flavored Milk.png' },
+      { id: 508, name: 'Buttermilk', category: 'coolers', price: 25, meta: '250 ml', image: 'images/dairy/Buttermilk.png' },
+      { id: 509, name: 'Fresh cream', category: 'dessert', price: 60, meta: '100 g', image: 'images/dairy/Cream.png' },
+      { id: 510, name: 'Punjabi lassi', category: 'coolers', price: 30, meta: '250 ml', image: 'images/dairy/Lassi.png' },
+      { id: 511, name: 'Khoya crumble', category: 'mithai base', price: 100, meta: '250 g', image: 'images/dairy/Khoya.png' },
+      { id: 512, name: 'Cheddar wedge', category: 'cheese room', price: 110, meta: '200 g', image: 'images/dairy/Cheddar Cheese.png' },
+      { id: 513, name: 'Mozzarella pearls', category: 'cheese room', price: 115, meta: '200 g', image: 'images/dairy/Mozzarella.png' },
+      { id: 514, name: 'Milk powder', category: 'pantry', price: 95, meta: '500 g', image: 'images/dairy/Milk Powder.png' },
+      { id: 515, name: 'Whey protein mix', category: 'wellness', price: 150, meta: '100 g', image: 'images/dairy/Whey Protein.png' },
+      { id: 516, name: 'Malted drink mix', category: 'nostalgia', price: 60, meta: '500 g', image: 'images/dairy/Malted Drink.png' },
+      { id: 517, name: 'Thick milkshake', category: 'treat', price: 45, meta: '300 ml', image: 'images/dairy/Milk Shake.png' },
+      { id: 518, name: 'Alphonso shrikhand', category: 'dessert', price: 70, meta: '200 g', image: 'images/dairy/Shrikhand.png' },
+      { id: 519, name: 'Probiotic curd', category: 'gut health', price: 55, meta: '400 g', image: 'images/dairy/Probiotic Curd.png' },
+      { id: 520, name: 'Low-fat milk', category: 'essentials', price: 50, meta: '1 L', image: 'images/dairy/Low-Fat Milk.png' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(dairyList);
+      KartUI.initSearch('category');
+    });
+  </script>
+</body>
+</html>
+

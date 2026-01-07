@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search for keepsakes & save for later..." aria-label="Search wishlist">
+        <button type="button">Save</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(119,33,111,0.92), rgba(46,196,182,0.85)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Wishlist your weekend fantasies.</h1>
+      <p>Track seasonal drops, chef collaborations, and gifting ideas in one elegant list. Toggle the wishlist drawer anytime or add curated pieces from below.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" data-target="wishlist-panel">View wishlist drawer</button>
+        <button class="btn-ghost" onclick="window.location.href='Home.html'">Return home</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>Sync</strong>
+          Across devices soon
+        </div>
+        <div class="hero-stat">
+          <strong>Share</strong>
+          Gift registry link
+        </div>
+        <div class="hero-stat">
+          <strong>Alerts</strong>
+          Get drop reminders
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Wishlist rituals</h2>
+        <span style="color: var(--muted);">Turn inspiration into pantry action.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-bell'></i>
+          <h3>Drop alerts</h3>
+          <p>We ping you when limited editions come back in stock or go on tasting sale.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-message-rounded-dots'></i>
+          <h3>Concierge chat</h3>
+          <p>DM our concierge to swap wishlist items into upcoming deliveries seamlessly.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-gift'></i>
+          <h3>Gift mode</h3>
+          <p>Flag an item as a gift to receive complimentary wrapping & handwritten notes.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-analyse'></i>
+          <h3>Seasonal swaps</h3>
+          <p>We recommend similar artisans if something goes off-season, so you never wait.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Save-worthy edits</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='cart.html'">Move to cart</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const wishlistEditorial = [
+      { id: 801, name: 'Chef’s market bouquet', category: 'featured', price: 1299, meta: 'Weekly drop', image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=800&q=80' },
+      { id: 802, name: 'Artisan cheese tower', category: 'gifting', price: 1799, meta: '5 varieties', image: 'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=800&q=80' },
+      { id: 803, name: 'Fermented pantry kit', category: 'pantry', price: 899, meta: '6 jars', image: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80' },
+      { id: 804, name: 'Brunch pastry tower', category: 'bakery', price: 999, meta: '12 pieces', image: 'https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=800&q=80' },
+      { id: 805, name: 'Wellness hydration set', category: 'beverage', price: 699, meta: '3 cold-pressed', image: 'https://images.unsplash.com/photo-1542444255-3d98c543b401?auto=format&fit=crop&w=800&q=80' },
+      { id: 806, name: 'Slow brunch essentials', category: 'bundle', price: 1499, meta: '10-piece kit', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(wishlistEditorial);
+    });
+  </script>
+</body>
+</html>
+

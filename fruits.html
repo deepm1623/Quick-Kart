@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fruits - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search orchard boxes & fruit platters..." aria-label="Search fruits">
+        <button type="button">Explore</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button class="active">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(190,62,62,0.92), rgba(255,200,92,0.85)), url('https://images.unsplash.com/photo-1502741126161-b048400d082f?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Sun-kissed orchards bottled into tasting flights.</h1>
+      <p>Hand-sort fruitology ensures only peak Brix sweetness makes the cut. Layer your brunch platters with exotic medleys curated by our in-house nutritionists.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Shop orchard</button>
+        <button class="btn-ghost" onclick="window.location.href='subscriptions.html'">Create fruit subscription</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>22 orchards</strong>
+          Across 4 states
+        </div>
+        <div class="hero-stat">
+          <strong>18° Brix</strong>
+          Avg sweetness
+        </div>
+        <div class="hero-stat">
+          <strong>2 hrs</strong>
+          Cold chain dispatch
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Platter-worthy perks</h2>
+        <span style="color: var(--muted);">Seasonally tuned recipes & garnish ideas inside every box.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-droplet'></i>
+          <h3>Hydrated transit</h3>
+          <p>Mist-lined crates keep delicate berries plump even on late-night deliveries.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-award'></i>
+          <h3>Sommelier tasting</h3>
+          <p>Each batch graded for aroma, crunch, and sweetness before it reaches you.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-body'></i>
+          <h3>Nutrition pairings</h3>
+          <p>Scan the QR to unlock smoothie boosts matched to your wellness goals.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-gift'></i>
+          <h3>Gift-ready</h3>
+          <p>Complimentary handwritten notes and ribboning for celebratory hampers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Orchard selection</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='Home.html'">Back to featured</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const fruitList = [
+      { id: 301, name: 'Honeycrisp apples', category: 'orchard', price: 60, meta: '1 kg', image: 'images/fruits/Apple.png' },
+      { id: 302, name: 'Organic bananas', category: 'tropical', price: 30, meta: '1 kg', image: 'images/fruits/Banana.png' },
+      { id: 303, name: 'Sicilian oranges', category: 'citrus', price: 50, meta: '1 kg', image: 'images/fruits/Orange.png' },
+      { id: 304, name: 'Kesar mangoes', category: 'seasonal', price: 80, meta: '1 kg', image: 'images/fruits/Mango.png' },
+      { id: 305, name: 'Sunrise papaya', category: 'wellness', price: 45, meta: '1 pc', image: 'images/fruits/Papaya.png' },
+      { id: 306, name: 'Golden pineapple', category: 'tropical', price: 70, meta: '1 pc', image: 'images/fruits/Pineapple.png' },
+      { id: 307, name: 'Picnic watermelon', category: 'summer', price: 90, meta: '1 whole', image: 'images/fruits/Watermelon.png' },
+      { id: 308, name: 'Pink guava', category: 'vitamin C', price: 40, meta: '1 kg', image: 'images/fruits/Guava.png' },
+      { id: 309, name: 'Kiwi trio', category: 'imported', price: 75, meta: '3 pcs', image: 'images/fruits/Kiwi.png' },
+      { id: 310, name: 'Thompson grapes', category: 'snacking', price: 55, meta: '500 g', image: 'images/fruits/Grapes.png' },
+      { id: 311, name: 'Sapodilla (chikoo)', category: 'dessert', price: 50, meta: '1 kg', image: 'images/fruits/Chikoo.png' },
+      { id: 312, name: 'Ruby pomegranate', category: 'antioxidant', price: 85, meta: '800 g', image: 'images/fruits/Pomegranate.png' },
+      { id: 313, name: 'Strawberry box', category: 'berry club', price: 95, meta: '250 g', image: 'images/fruits/Strawberry.png' },
+      { id: 314, name: 'Blueberry jar', category: 'superfood', price: 120, meta: '150 g', image: 'images/fruits/Blueberry.png' },
+      { id: 315, name: 'Lychee bouquet', category: 'seasonal', price: 60, meta: '500 g', image: 'images/fruits/Lychee.png' },
+      { id: 316, name: 'D’Anjou pears', category: 'imported', price: 65, meta: '4 pcs', image: 'images/fruits/Pear.png' },
+      { id: 317, name: 'Peach medley', category: 'stone fruit', price: 70, meta: '600 g', image: 'images/fruits/Peach.png' },
+      { id: 318, name: 'Plum clutch', category: 'stone fruit', price: 68, meta: '600 g', image: 'images/fruits/Plum.png' },
+      { id: 319, name: 'Custard apple', category: 'heritage', price: 85, meta: '1 kg', image: 'images/fruits/Custard Apple.png' },
+      { id: 320, name: 'Dragon fruit shards', category: 'exotic', price: 110, meta: '1 pc', image: 'images/fruits/Dragon Fruit.png' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(fruitList);
+      KartUI.initSearch('category');
+    });
+  </script>
+</body>
+</html>
+

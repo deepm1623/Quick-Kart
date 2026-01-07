@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bakery - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search viennoiserie & sourdough sets..." aria-label="Search bakery">
+        <button type="button">Pairings</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button class="active">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(47,24,15,0.9), rgba(140,82,59,0.75)), url('https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Buttery layers baked overnight & dispatched warm.</h1>
+      <p>Partner patisseries ferment dough for up to 48 hours before firing it in stone deck ovens. Exclusive spreads, ferments, and brunch pairings arrive in the same tote.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">Shop viennoiserie</button>
+        <button class="btn-ghost" onclick="window.location.href='Home.html'">Back to curation</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>72 hrs</strong>
+          Prefermentation
+        </div>
+        <div class="hero-stat">
+          <strong>12 bakers</strong>
+          City exclusive
+        </div>
+        <div class="hero-stat">
+          <strong>Warm seal</strong>
+          Delivered under 30°C
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Crumb credentials</h2>
+        <span style="color: var(--muted);">Chef notes & heating rituals tucked inside every brown bag.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-timer'></i>
+          <h3>Slow fermentation</h3>
+          <p>Natural levain ensures lower gluten load while amplifying complex flavor.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-cheese'></i>
+          <h3>Pairing jars</h3>
+          <p>Complimentary compound butters & seasonal jams rotate each fortnight.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-repost'></i>
+          <h3>Heat & crisp</h3>
+          <p>Detailed reheat cards help you recreate bakery-grade crust in 3 minutes.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-leaf'></i>
+          <h3>Clean labels</h3>
+          <p>Flours are stone-milled, with zero improvers or artificial conditioners.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Patissier edit</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='subscriptions.html'">Schedule brunch kit</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const bakeryList = [
+      { id: 401, name: 'Artisan white loaf', category: 'daily bread', price: 30, meta: '1 pc', image: 'images/bakery/White Bread.png' },
+      { id: 402, name: 'Molasses brown bread', category: 'daily bread', price: 35, meta: '1 pc', image: 'images/bakery/Brown Bread.png' },
+      { id: 403, name: 'Milk buns (pack of 4)', category: 'snack', price: 20, meta: 'box', image: 'images/bakery/Bun.png' },
+      { id: 404, name: 'Butter croissant', category: 'viennoiserie', price: 50, meta: '1 pc', image: 'images/bakery/Croissant.png' },
+      { id: 405, name: 'Classic donut', category: 'dessert', price: 45, meta: '1 pc', image: 'images/bakery/Donut.png' },
+      { id: 406, name: 'Blueberry muffin', category: 'tea time', price: 40, meta: '1 pc', image: 'images/bakery/Muffin.png' },
+      { id: 407, name: 'Velvet cupcake', category: 'dessert', price: 38, meta: '1 pc', image: 'images/bakery/Cupcake.png' },
+      { id: 408, name: 'Fruit cake slice', category: 'tea time', price: 60, meta: 'slice', image: 'images/bakery/Fruit Cake.png' },
+      { id: 409, name: 'Pound cake slice', category: 'tea time', price: 65, meta: 'slice', image: 'images/bakery/Pound Cake.png' },
+      { id: 410, name: 'Vanilla cream roll', category: 'dessert', price: 55, meta: '1 pc', image: 'images/bakery/Cream Roll.png' },
+      { id: 411, name: 'Garlic baguette', category: 'savory', price: 50, meta: '1 pc', image: 'images/bakery/Garlic Bread.png' },
+      { id: 412, name: 'Seeded breadsticks', category: 'snack', price: 25, meta: 'pack', image: 'images/bakery/Breadsticks.png' },
+      { id: 413, name: 'Sesame bagel', category: 'breakfast', price: 45, meta: '1 pc', image: 'images/bakery/Bagel.png' },
+      { id: 414, name: 'Pizza base duo', category: 'pantry', price: 35, meta: 'pack of 2', image: 'images/bakery/Pizza Base.png' },
+      { id: 415, name: 'Khari pastry', category: 'snack', price: 22, meta: '100 g', image: 'images/bakery/Khari.png' },
+      { id: 416, name: 'Cardamom rusk', category: 'tea dip', price: 28, meta: '100 g', image: 'images/bakery/Rusk.png' },
+      { id: 417, name: 'Paneer puff', category: 'savory', price: 42, meta: '1 pc', image: 'images/bakery/Paneer Puff.png' },
+      { id: 418, name: 'Veg puff', category: 'savory', price: 40, meta: '1 pc', image: 'images/bakery/Veg Puff.png' },
+      { id: 419, name: 'Cheese bun', category: 'snack', price: 48, meta: '1 pc', image: 'images/bakery/Cheese Bun.png' },
+      { id: 420, name: 'Chocolate cake slice', category: 'dessert', price: 75, meta: 'slice', image: 'images/bakery/Chocolate Cake.png' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(bakeryList);
+      KartUI.initSearch('category');
+    });
+  </script>
+</body>
+</html>
+

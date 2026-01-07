@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - QuickKart</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Quickkart.css">
+  <script src="QuickKart.js" defer></script>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <header>
+    <div class="header-container">
+      <a href="Home.html" class="logo">
+        <img src="logo.png" alt="QuickKart Logo" />
+        <div>
+          <div class="brand-name">QuickKart</div>
+          <div class="tagline">Slow farmed, fast delivered.</div>
+        </div>
+      </a>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="search" placeholder="Search cart toppers & last-minute add-ons..." aria-label="Search add-ons">
+        <button type="button">Suggest</button>
+      </div>
+      <div class="icons">
+        <button class="icon-button" data-target="wishlist-panel">
+          <i class='bx bx-heart'></i> Wishlist <span class="count" id="wishlist-count">0</span>
+        </button>
+        <button class="icon-button" data-target="cart-panel">
+          <i class='bx bx-cart'></i> Cart <span class="count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="category-nav">
+    <button onclick="window.location.href='vegetables.html'">vegetables</button>
+    <button onclick="window.location.href='fruits.html'">fruits</button>
+    <button onclick="window.location.href='bakery.html'">bakery</button>
+    <button onclick="window.location.href='dairy.html'">dairy</button>
+    <button onclick="window.location.href='grains.html'">grains</button>
+  </nav>
+
+  <section class="hero hero-compact" style="background-image: linear-gradient(120deg, rgba(14,32,61,0.92), rgba(46,196,182,0.8)), url('https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80');">
+    <div>
+      <h1>Your cart, curated.</h1>
+      <p>Review your picks via the floating summary or the slide-in cart. Build out brunch spreads with chef-approved add-ons below before scheduling your delivery window.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" data-target="cart-panel">Open cart drawer</button>
+        <button class="btn-ghost" onclick="window.location.href='Home.html'">Continue shopping</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>Free</strong>
+          Chill packs above ₹999
+        </div>
+        <div class="hero-stat">
+          <strong>15 min</strong>
+          Hold window to edit
+        </div>
+        <div class="hero-stat">
+          <strong>Slots</strong>
+          6–11 am & 5–10 pm
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h2>Cart concierge tips</h2>
+        <span style="color: var(--muted);">Lock freshness with these easy rituals before checkout.</span>
+      </div>
+      <div class="benefits">
+        <div class="benefit-card">
+          <i class='bx bx-refresh'></i>
+          <h3>Swap or repeat</h3>
+          <p>Use the +/- buttons in the cart drawer to update quantities in one tap.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-current-location'></i>
+          <h3>Delivery pin</h3>
+          <p>Ensure geo-location is enabled at checkout for precise 30-minute slots.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-purchase-tag'></i>
+          <h3>Apply tasting codes</h3>
+          <p>Add chef codes to unlock bundle tasting kits before you finalize.</p>
+        </div>
+        <div class="benefit-card">
+          <i class='bx bx-box'></i>
+          <h3>Return totes</h3>
+          <p>Keep insulated totes ready; riders collect them for your next order credit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-header">
+        <h2>Recommended add-ons</h2>
+        <button class="btn-ghost" style="color: var(--primary); border-color: rgba(10,38,71,0.12);" onclick="window.location.href='wishlist.html'">Move from wishlist</button>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </main>
+
+  <div class="floating-summary">
+    <div>
+      <div style="color: var(--muted); font-size: 0.85rem;">Cart total</div>
+      <div id="cart-total" style="font-size: 1.3rem;">₹0.00</div>
+    </div>
+    <button type="button" data-target="cart-panel">Review order</button>
+  </div>
+
+  <aside class="side-panel" id="cart-panel">
+    <div class="panel-header">
+      <strong>Your cart</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="cart-items"></div>
+    <div class="panel-footer">
+      <div style="display:flex; justify-content: space-between; font-weight: 600;">
+        <span>Subtotal</span>
+        <span id="panel-total">₹0.00</span>
+      </div>
+      <button style="background: var(--primary); color:#fff;">Proceed to checkout</button>
+    </div>
+  </aside>
+
+  <aside class="side-panel" id="wishlist-panel">
+    <div class="panel-header">
+      <strong>Wishlist</strong>
+      <button type="button" data-close>&times;</button>
+    </div>
+    <div class="panel-content" id="wishlist-items"></div>
+    <div class="panel-footer">
+      <button style="border:1px solid rgba(10,38,71,0.15); background:#fff; color:var(--primary);" onclick="moveWishlistToCart()">Move all to cart</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast"></div>
+
+  <footer>
+    <div>© 2025 QuickKart. All rights reserved. <a href="devloper.html">Meet the artisans</a></div>
+  </footer>
+
+  <script>
+    const cartAddOns = [
+      { id: 701, name: 'Brunch berry mix', category: 'fresh fruit', price: 349, meta: '650 g', image: 'https://images.unsplash.com/photo-1464306076886-da185f6a9d12?auto=format&fit=crop&w=800&q=80' },
+      { id: 702, name: 'Sourdough crackle chips', category: 'snack', price: 249, meta: '220 g', image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80' },
+      { id: 703, name: 'Cold pressed juice trio', category: 'beverage', price: 399, meta: '3 x 250 ml', image: 'https://images.unsplash.com/photo-1542444255-3d98c543b401?auto=format&fit=crop&w=800&q=80' },
+      { id: 704, name: 'Truffle butter jar', category: 'gourmet', price: 299, meta: '150 g', image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80' },
+      { id: 705, name: 'Salad dressing duo', category: 'condiment', price: 259, meta: '2 x 120 ml', image: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80' },
+      { id: 706, name: 'Midnight cookie tin', category: 'dessert', price: 329, meta: '12 pcs', image: 'https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=800&q=80' }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      KartUI.mountProducts(cartAddOns);
+    });
+  </script>
+</body>
+</html>
+
